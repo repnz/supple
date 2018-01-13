@@ -1,0 +1,79 @@
+## Supple
+"bending and moving easily and gracefully; flexible"
+## What is Supple?
+A .NET Library that allows deserialization of complex XML objects. the main motivation of this library is loading application configuration that allows dependency injection in the configuration file
+## Features
+- Deserialization of interface properties
+- References between deserialized objects
+- ...
+
+## Usage
+Say you have this printing application, which has an `IPrinter` interface in it 
+``` C#
+interface IPrinter
+{
+    void Print();
+}
+
+class StringPrinter : IPrinter
+{
+    public string StringToWrite { get; set; }
+    
+    public void Print()
+    {
+        Console.WriteLine(StringToWrite);
+    }
+}
+
+class FilePrinter : IPrinter
+{
+    public string FilePath { get; set; }
+    
+    public void Print()
+    {
+        Console.WriteLine(File.ReadAllText(FilePath));
+    }
+}
+
+class PrintApp 
+{ 
+    public void Run(List<IPrinter> printers)
+    {
+        foreach (var printer in printers) 
+        {
+          printer.Print();
+        }
+    }
+}
+```
+
+List<IPrinter> can be deserialized from this configuration file:
+
+``` XML
+<ListOfPrinter>
+    <Printer Type="FilePrinter" FilePath="C:\FileToPrint.txt"/>
+    <Printer Type="StringPrinter" StringToPrint="I Love Flexibility"/>
+</ListOfPrinter>
+```
+
+And run it via this code
+
+``` C#
+// Specify runtime types
+IRuntimeTypeResolver resolver = new StaticTypeResolver();
+resolver.AddType<FilePrinter>();
+resolver.AddType<StringPrinter>();
+
+// Create Deserializer 
+ISuppleDeserializer deserializer = new SuppleXmlDeserializer(resolver);
+
+// Deserialize printers
+var printers = deserializer.Deserialize<List<IPrinter>>();
+
+PrintApp.Run(printers);
+```
+
+## Backlog
+- Support classes with constructors
+- Provide API for custom user deserialization
+- Remove the need for StaticTypeResolver
