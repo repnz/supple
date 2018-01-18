@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Linq;
 
-namespace Supple.Xml.List
+namespace Supple.Xml.Collection
 {
-    public class ListElementDeserializer : IElementDeserializer
+    public class CollectionElementDeserializer : IElementDeserializer
     {
         private readonly IElementDeserializer _elementDeserializer;
         private readonly ITypeNameCreator _nameCreator;
 
-        public ListElementDeserializer(IElementDeserializer elementDeserializer,
+        public CollectionElementDeserializer(IElementDeserializer elementDeserializer,
             ITypeNameCreator nameCreator)
         {
             _elementDeserializer = elementDeserializer;
@@ -17,11 +19,11 @@ namespace Supple.Xml.List
 
         public object Deserialize(Type type, XElement element)
         {
-            Type collectionBase = ListTools.GetListBase(type);
-            Type elementType = ListTools.GetListElementType(collectionBase);
-            System.Collections.IList list = 
-                (System.Collections.IList)Activator.CreateInstance(type);
+            Type collectionBase = CollectionTools.GetCollectionBase(type);
+            Type elementType = CollectionTools.GetCollectionElementType(collectionBase);
 
+            object list = Activator.CreateInstance(type);
+            MethodInfo method = collectionBase.GetMethod("Add");
             string elementTypeName = _nameCreator.CreateName(elementType);
 
             foreach (XElement subElement in element.Elements())
@@ -33,8 +35,7 @@ namespace Supple.Xml.List
                 }
 
                 object obj = _elementDeserializer.Deserialize(elementType, subElement);
-
-                list.Add(obj);
+                method.Invoke(list, new object[] { obj });
             }
 
             return list;
@@ -42,7 +43,7 @@ namespace Supple.Xml.List
 
         public bool IsMatch(Type type, XElement element)
         {
-            return ListTools.HasListBase(type);
+            return CollectionTools.HasCollectionBase(type);
         }
     }
 }

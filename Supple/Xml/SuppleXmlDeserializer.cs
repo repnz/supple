@@ -1,5 +1,5 @@
-﻿using Supple.Xml.ElementDeserializers;
-using Supple.Xml.List;
+﻿using Supple.Xml.Collection;
+using Supple.Xml.ElementDeserializers;
 using Supple.Xml.NameCreators;
 using Supple.Xml.References;
 using System;
@@ -33,7 +33,7 @@ namespace Supple.Xml
             delegator.ElementDeserializers.Add(interfaceDeserializer);
             delegator.ElementDeserializers.Add(new ElementValueDeserializer(delegator));
 
-            delegator.ElementDeserializers.Add(new ListElementDeserializer(
+            delegator.ElementDeserializers.Add(new CollectionElementDeserializer(
                     delegator,
                     delegator
                 ));
@@ -43,8 +43,8 @@ namespace Supple.Xml
             // Value Deserializers
             delegator.ValueDeserializers.Add(new ReferenceVariableDeserializer(referenceStore));
             delegator.ValueDeserializers.Add(new ConvertableDeserializer());
-            delegator.ValueDeserializers.Add(new ListValueDeserializer(delegator));
-
+            delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator));
+            
             // Type Name Creators
             delegator.TypeNameCreators.Add(new GenericNameCreator(delegator));
             delegator.TypeNameCreators.Add(new InterfaceNameCreator());

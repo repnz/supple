@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Reflection;
 
-namespace Supple.Xml.List
+namespace Supple.Xml.Collection
 {
-    class ListValueDeserializer : IValueDeserializer
+    class CollectionValueDeserializer : IValueDeserializer
     {
         private readonly IValueDeserializer _valueDeserializer;
 
-        public ListValueDeserializer(IValueDeserializer valueDeserializer)
+        public CollectionValueDeserializer(IValueDeserializer valueDeserializer)
         {
             _valueDeserializer = valueDeserializer;
         }
 
         public object Deserialize(Type type, string name, string value)
         {
-            Type listBase = ListTools.GetListBase(type);
-            Type elementType = ListTools.GetListElementType(listBase);
-            System.Collections.IList list = 
-                (System.Collections.IList)Activator.CreateInstance(type);
+            Type listBase = CollectionTools.GetCollectionBase(type);
+            Type elementType = CollectionTools.GetCollectionElementType(listBase);
+            object instance = Activator.CreateInstance(type);
+            MethodInfo method = listBase.GetMethod("Add");
 
             foreach (string listElementValue in value.Split(','))
             {
@@ -26,14 +27,14 @@ namespace Supple.Xml.List
                     listElementValue
                     );
 
-                list.Add(listItem);
+                method.Invoke(instance, new object[] { listItem });
             }
 
-            return list;
+            return instance;
         }
         public bool IsMatch(Type type, string name, string value)
         {
-            return ListTools.HasListBase(type);
+            return CollectionTools.HasCollectionBase(type);
         }
     }
 }

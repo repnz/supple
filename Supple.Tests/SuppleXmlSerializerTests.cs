@@ -282,5 +282,34 @@ namespace Supple.Tests
             Assert.IsTrue(deserialized.NamedElements[1] == deserialized.Holder.B);
 
         }
+
+        [TestMethod]
+        public void Deserialize_TestDictionary()
+        {
+            string objectXml =
+                "<DictionaryOfStringAndString>" +
+                        "<KeyValuePairOfStringAndString Key=\"NameA\" Value=\"ValueA\"/>" +
+                        "<KeyValuePairOfStringAndString Key=\"NameB\" Value=\"ValueB\"/>" +
+                    "</DictionaryOfStringAndString>";
+
+            var obj = Deserialize<Dictionary<string, string>>(objectXml);
+
+            Assert.AreEqual("ValueA", obj["NameA"]);
+            Assert.AreEqual("ValueB", obj["NameB"]);
+        }
+
+        [TestMethod]
+        public void Deserialize_HasConstructor_CallConstructor()
+        {
+            string objectXml =
+                "<ConstructorObject ParamA=\"ParamA\">" +
+                    "<ParamB>ParamB</ParamB>" +
+                "</ConstructorObject>";
+
+            ConstructorObject obj = Deserialize<ConstructorObject>(objectXml);
+
+            Assert.AreEqual("ParamA", obj.ParamA);
+            Assert.AreEqual("ParamB", obj.ParamB);
+        }
     }
 }

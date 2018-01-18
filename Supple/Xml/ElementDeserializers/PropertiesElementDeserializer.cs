@@ -6,14 +6,10 @@ namespace Supple.Xml.ElementDeserializers
 {
     public class PropertiesElementDeserializer : BaseElementDeserializer
     {
-        protected IElementDeserializer ElementDeserializer { get; }
-        protected IValueDeserializer ValueDeserializer { get; }
 
-        public PropertiesElementDeserializer(IElementDeserializer elementDeserializer, 
-            IValueDeserializer valueDeserializer)
+        public PropertiesElementDeserializer(IElementDeserializer elementDeserializer,
+         IValueDeserializer valueDeserializer) : base(elementDeserializer, valueDeserializer)
         {
-            ElementDeserializer = elementDeserializer;
-            ValueDeserializer = valueDeserializer;
         }
 
         private PropertyInfo GetProperty(Type type, string propertyName)

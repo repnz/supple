@@ -35,6 +35,7 @@ namespace Supple.Xml
 
         public object Deserialize(Type type, XElement element)
         {
+            
             foreach (IElementDeserializer valueDeserializer in ElementDeserializers)
             {
                 if (valueDeserializer.IsMatch(type, element))

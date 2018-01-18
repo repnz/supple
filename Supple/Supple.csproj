@@ -44,7 +44,14 @@
     <Compile Include="IRuntimeTypeResolver.cs" />
     <Compile Include="ISuppleDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xml\Collection\CollectionElementDeserializer.cs" />
+    <Compile Include="Xml\Collection\CollectionTools.cs" />
+    <Compile Include="Xml\Collection\CollectionValueDeserializer.cs" />
     <Compile Include="Xml\DelegatorDeserializer.cs" />
+    <Compile Include="Xml\InstanceCreators\ConstructorCaller.cs" />
+    <Compile Include="Xml\InstanceCreators\DefaultInstanceCreator.cs" />
+    <Compile Include="Xml\InstanceCreators\IInstanceCreator.cs" />
+    <Compile Include="Xml\NameCreators\KeyValuePairNameCreator.cs" />
     <Compile Include="Xml\StaticTypeResolver.cs" />
     <Compile Include="Xml\IValueDeserializer.cs" />
     <Compile Include="Xml\IElementDeserializer.cs" />
@@ -54,9 +61,6 @@
     <Compile Include="Xml\ElementDeserializers\InterfaceDeserializer.cs" />
     <Compile Include="Xml\ElementDeserializers\PropertiesElementDeserializer.cs" />
     <Compile Include="Xml\ElementDeserializers\ReferenceAddingElementDeserializer.cs" />
-    <Compile Include="Xml\List\ListElementDeserializer.cs" />
-    <Compile Include="Xml\List\ListTools.cs" />
-    <Compile Include="Xml\List\ListValueDeserializer.cs" />
     <Compile Include="Xml\NameCreators\DefaultTypeNameCreator.cs" />
     <Compile Include="Xml\NameCreators\GenericNameCreator.cs" />
     <Compile Include="Xml\NameCreators\InterfaceNameCreator.cs" />

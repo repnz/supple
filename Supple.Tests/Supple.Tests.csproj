@@ -52,6 +52,7 @@
     <Compile Include="References\NamedElement.cs" />
     <Compile Include="References\ObjectWithReferenceContainer.cs" />
     <Compile Include="References\ReferenceHolder.cs" />
+    <Compile Include="TestObjects\ConstructorObject.cs" />
     <Compile Include="TestObjects\IntMembersTestObject.cs" />
     <Compile Include="SuppleXmlSerializerTests.cs" />
     <Compile Include="TestObjects\ListTestObject.cs" />
