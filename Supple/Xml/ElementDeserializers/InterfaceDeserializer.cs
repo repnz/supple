@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supple.Xml.Exceptions;
+using System;
 using System.Xml.Linq;
 
 namespace Supple.Xml
@@ -23,9 +24,24 @@ namespace Supple.Xml
         public object Deserialize(Type type, XElement element)
         {
             XAttribute typeNameAttr = element.Attribute(XName.Get("Type"));
+
+            if (typeNameAttr == null)
+            {
+                throw new InterfaceTypeNotFoundException(element);
+            }
+
             string typeName = typeNameAttr.Value;
             typeNameAttr.Remove();
-            type = _typeResolver.GetType(typeName);
+
+            try
+            {
+                type = _typeResolver.GetType(typeName);
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeTypeException(typeName, e);
+            }
+            
             return _elementDeserializer.Deserialize(type, element);
         }
     }

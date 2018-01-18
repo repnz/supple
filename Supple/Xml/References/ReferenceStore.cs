@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Supple.Xml.Exceptions;
 using System.Collections.Generic;
 
 namespace Supple.Xml.References
@@ -24,7 +24,7 @@ namespace Supple.Xml.References
                 return returnValue;
             }
 
-            throw new InvalidOperationException();
+            throw new ReferenceNotFoundException(varName);
         }
 
         public void Reset()

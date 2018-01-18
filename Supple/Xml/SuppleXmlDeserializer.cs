@@ -1,5 +1,6 @@
 ﻿using Supple.Xml.Collection;
 using Supple.Xml.ElementDeserializers;
+using Supple.Xml.Exceptions;
 using Supple.Xml.NameCreators;
 using Supple.Xml.References;
 using System;
@@ -57,10 +58,11 @@ namespace Supple.Xml
         {
             XElement element = XElement.Load(stream);
             var delegator = CreateDelegator(_runtimeTypeResolver);
-            
-            if (delegator.CreateName(typeof(T)) != element.Name.LocalName)
+            string expectedElementName = delegator.CreateName(typeof(T));
+
+            if (expectedElementName != element.Name.LocalName)
             {
-                throw new InvalidOperationException();
+                throw new UnexpectedElementException(expectedElementName, element);
             }
 
             return (T)delegator.Deserialize(typeof(T), element);

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Supple.Xml.Exceptions;
+using System;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -31,13 +31,13 @@ namespace Supple.Xml.Collection
                 // validate subElement Name
                 if (subElement.Name.LocalName != elementTypeName)
                 {
-                    throw new InvalidOperationException();
+                    throw new UnexpectedElementException(elementTypeName, subElement);
                 }
 
                 object obj = _elementDeserializer.Deserialize(elementType, subElement);
                 method.Invoke(list, new object[] { obj });
             }
-
+             
             return list;
         }
 

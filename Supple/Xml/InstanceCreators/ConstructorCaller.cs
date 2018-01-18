@@ -1,10 +1,9 @@
-﻿using Supple.Xml.InstanceCreators;
+﻿using Supple.Xml.Exceptions;
+using Supple.Xml.InstanceCreators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Supple.Xml.ElementDeserializers
@@ -37,7 +36,7 @@ namespace Supple.Xml.ElementDeserializers
                 }
             }
 
-            throw new InvalidOperationException();
+            throw new ConstructorNotFoundException(element, type);
         }
 
         private ISet<string> GetNamesSet(XElement element)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supple.Xml.Exceptions;
+using System;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -14,10 +15,17 @@ namespace Supple.Xml.ElementDeserializers
 
         private PropertyInfo GetProperty(Type type, string propertyName)
         {
-            return type.GetProperty(
+            PropertyInfo prop = type.GetProperty(
                 propertyName,
                 BindingFlags.Public | BindingFlags.Instance
                 );
+
+            if (prop == null)
+            {
+                throw new PropertyNotFoundException(propertyName, type);
+            }
+
+            return prop;
         }
 
         protected override void HandleAttribute(object instance, XAttribute attribute)
