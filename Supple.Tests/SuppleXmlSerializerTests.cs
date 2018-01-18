@@ -17,7 +17,7 @@ namespace Supple.Tests
         [TestInitialize]
         public void Initialize()
         {
-            IRuntimeTypeResolver typeResolver = new StaticTypeResolver();
+            StaticTypeResolver typeResolver = new StaticTypeResolver();
             typeResolver.AddType<TestInterfaceImpl1>();
             typeResolver.AddType<TestInterfaceImpl2>();
             deserializer = new SuppleXmlDeserializer(typeResolver);
