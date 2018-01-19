@@ -3,7 +3,6 @@ using Supple.Xml.ElementDeserializers;
 using Supple.Xml.Exceptions;
 using Supple.Xml.NameCreators;
 using Supple.Xml.References;
-using System;
 using System.IO;
 using System.Xml.Linq;
 

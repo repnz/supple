@@ -24,6 +24,11 @@ namespace Supple.Xml.ElementDeserializers
             {
                 throw new PropertyNotFoundException(propertyName, type);
             }
+            if (prop.SetMethod == null)
+            {
+                throw new PropertyNotFoundException(propertyName, type,
+                    "Property Does Not Contain Public Setter");
+            }
 
             return prop;
         }

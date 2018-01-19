@@ -28,7 +28,7 @@ namespace Supple.Xml.ElementDeserializers
 
             ISet<string> names = GetNamesSet(element);
 
-            foreach (ConstructorInfo ctor in ctors)
+            foreach (ConstructorInfo ctor in ctors.OrderByDescending(c => c.GetParameters().Length))
             {
                 if (MatchConstructor(type, ctor, element, names))
                 {
@@ -36,7 +36,17 @@ namespace Supple.Xml.ElementDeserializers
                 }
             }
 
-            throw new ConstructorNotFoundException(element, type);
+            ConstructorInfo defaultCtor = type.GetConstructor(new Type[] { });
+
+            if (defaultCtor == null)
+            {
+                throw new ConstructorNotFoundException(element, type);
+            }
+            else
+            {
+                return defaultCtor.Invoke(new object[] { });
+            }
+            
         }
 
         private ISet<string> GetNamesSet(XElement element)

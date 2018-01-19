@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using System.Xml.Linq;
 
 namespace Supple.Xml.Exceptions
 {
-    class ConstructorNotFoundException : Exception
+    public class ConstructorNotFoundException : Exception
     {
         public XElement Element { get; }
         public Type Type { get; }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Supple.Tests.TestObjects
+﻿namespace Supple.Tests.TestObjects
 {
     class ConvertibleMembersTestObject
     {

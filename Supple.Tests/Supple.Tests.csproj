@@ -69,6 +69,8 @@
     <Compile Include="TestObjects\SubProperties.cs" />
     <Compile Include="TestObjects\SubPropertiesTestObject.cs" />
     <Compile Include="TestObjects\ITestInterface.cs" />
+    <Compile Include="TestObjects\ThreeConstructorTestObject.cs" />
+    <Compile Include="TestObjects\TwoConstructorTestObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
