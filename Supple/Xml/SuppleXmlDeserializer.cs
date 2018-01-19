@@ -4,6 +4,7 @@ using Supple.Xml.Exceptions;
 using Supple.Xml.NameCreators;
 using Supple.Xml.References;
 using System.IO;
+using System.Text;
 using System.Xml.Linq;
 
 namespace Supple.Xml
@@ -15,6 +16,10 @@ namespace Supple.Xml
         public SuppleXmlDeserializer(IRuntimeTypeResolver runtimeTypeResolver)
         {
             _runtimeTypeResolver = runtimeTypeResolver;
+        }
+
+        public SuppleXmlDeserializer() : this(new StaticTypeResolver())
+        {
         }
 
         private DelegatorDeserializer CreateDelegator(IRuntimeTypeResolver resolver)
@@ -51,18 +56,31 @@ namespace Supple.Xml
             return delegator;
         }
         
-        public T Deserialize<T>(Stream stream)
+        private T Deserialize<T>(XElement rootElement)
         {
-            XElement element = XElement.Load(stream);
             var delegator = CreateDelegator(_runtimeTypeResolver);
             string expectedElementName = delegator.CreateName(typeof(T));
 
-            if (expectedElementName != element.Name.LocalName)
+            if (expectedElementName != rootElement.Name.LocalName)
             {
-                throw new UnexpectedElementException(expectedElementName, element);
+                throw new UnexpectedElementException(expectedElementName, rootElement);
             }
 
-            return (T)delegator.Deserialize(typeof(T), element);
+            return (T)delegator.Deserialize(typeof(T), rootElement);
+        }
+
+        public T Deserialize<T>(Stream stream)
+        {
+            return Deserialize<T>(XElement.Load(stream));
+            
+        }
+
+        public T Deserialize<T>(string xml)
+        {
+            using (TextReader textReader = new StringReader(xml))
+            {
+                return Deserialize<T>(XElement.Load(textReader));
+            }
         }
     }
 }

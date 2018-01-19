@@ -13,8 +13,7 @@ namespace Supple.Tests
         [TestInitialize]
         public void Initialize()
         {
-            StaticTypeResolver typeResolver = new StaticTypeResolver();
-            _tester = new SuppleDeserializerTester(new SuppleXmlDeserializer(typeResolver));
+            _tester = new SuppleDeserializerTester();
         }
 
         [TestMethod]
