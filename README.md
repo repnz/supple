@@ -78,7 +78,7 @@ resolver.AddType<StringPrinter>();
 ISuppleDeserializer deserializer = new SuppleXmlDeserializer(resolver);
 
 // Deserialize printers
-var printers = deserializer.Deserialize<List<IPrinter>>();
+var printers = deserializer.Deserialize<List<IPrinter>>(xml);
 
 PrintApp.Run(printers);
 ```
