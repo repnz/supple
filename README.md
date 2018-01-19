@@ -21,7 +21,7 @@ class StringPrinter : IPrinter
     
     public StringPrinter(string stringToWrite)
     {
-		StringToWrite = stringToWrite;
+        StringToWrite = stringToWrite;
     }
 
     public void Print()
@@ -51,7 +51,7 @@ class PrintApp
     {
         foreach (var printer in printers) 
         {
-          printer.Print();
+            printer.Print();
         }
     }
 }
@@ -70,7 +70,7 @@ And run it via this code
 
 ``` C#
 // Specify runtime types
-IRuntimeTypeResolver resolver = new StaticTypeResolver();
+StaticTypeResolver resolver = new StaticTypeResolver();
 resolver.AddType<FilePrinter>();
 resolver.AddType<StringPrinter>();
 
