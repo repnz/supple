@@ -17,35 +17,35 @@ namespace Supple.Tests
         }
 
         [TestMethod]
-        public void GenericNameCreator_NormalType_CreateName()
+        public void NormalType_CreateName()
         {
             string typeName = _nameCreator.CreateName(typeof(ConstructorObject));
             Assert.AreEqual(nameof(ConstructorObject), typeName);
         }
 
         [TestMethod]
-        public void GenericNameCreator_TwoGenericArgs_CreateName()
+        public void TwoGenericArgs_CreateName()
         {
             string typeName = _nameCreator.CreateName(typeof(KeyValuePair<string,string>));
             Assert.AreEqual("KeyValuePairOfStringAndString", typeName);
         }
 
         [TestMethod]
-        public void GenericNameCreator_OneGenericArg_CreateName()
+        public void OneGenericArg_CreateName()
         {
             string typeName = _nameCreator.CreateName(typeof(List<string>));
             Assert.AreEqual("ListOfString", typeName);
         }
 
         [TestMethod]
-        public void GenericNameCreator_InterfaceType_CreateName()
+        public void InterfaceType_CreateName()
         {
             string typeName = _nameCreator.CreateName(typeof(ITestInterface));
             Assert.AreEqual("TestInterface", typeName);
         }
 
         [TestMethod]
-        public void GenericNameCreator_InterfaceGenericArg_CreateName()
+        public void InterfaceGenericArg_CreateName()
         {
             string typeName = _nameCreator.CreateName(typeof(List<ITestInterface>));
             Assert.AreEqual("ListOfTestInterface", typeName);
