@@ -60,7 +60,7 @@ namespace Supple.Tests
         }
 
         [TestMethod]
-        public void InterfaceProperty_WithoutType_ThrowsException()
+        public void Interface_WithoutType_ThrowsException()
         {
             string objectXml =
                 "<TestInterface>" +
@@ -72,6 +72,26 @@ namespace Supple.Tests
             catch (InterfaceTypeNotFoundException e)
             {
                 Assert.AreEqual("TestInterface", e.Element.Name);
+                Assert.AreEqual(typeof(ITestInterface), e.InterfaceType);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown");
+        }
+
+        [TestMethod]
+        public void Interface_WithUnknownType_ThrowsException()
+        {
+            string objectXml =
+                "<TestInterface Type=\"Impl\">" +
+                "</TestInterface>";
+            try
+            {
+                _tester.Deserialize<ITestInterface>(objectXml);
+            }
+            catch (RuntimeTypeException e)
+            {
+                Assert.AreEqual("Impl", e.TypeName);
                 Assert.AreEqual(typeof(ITestInterface), e.InterfaceType);
                 return;
             }

@@ -39,7 +39,7 @@ namespace Supple.Xml
             }
             catch (Exception e)
             {
-                throw new RuntimeTypeException(typeName, e);
+                throw new RuntimeTypeException(typeName, type, e);
             }
             
             return _elementDeserializer.Deserialize(type, element);
