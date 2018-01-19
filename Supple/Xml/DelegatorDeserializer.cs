@@ -35,11 +35,11 @@ namespace Supple.Xml
 
         public object Deserialize(Type type, XElement element)
         {
-            foreach (IElementDeserializer valueDeserializer in ElementDeserializers)
+            foreach (IElementDeserializer elementDeserializer in ElementDeserializers)
             {
-                if (valueDeserializer.IsMatch(type, element))
+                if (elementDeserializer.IsMatch(type, element))
                 {
-                    return valueDeserializer.Deserialize(type, element);
+                    return elementDeserializer.Deserialize(type, element);
                 }
             }
 
