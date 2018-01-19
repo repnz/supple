@@ -6,10 +6,13 @@ namespace Supple.Xml.Collection
     class CollectionValueDeserializer : IValueDeserializer
     {
         private readonly IValueDeserializer _valueDeserializer;
+        private readonly ITypeNameCreator _nameCreator;
 
-        public CollectionValueDeserializer(IValueDeserializer valueDeserializer)
+        public CollectionValueDeserializer(IValueDeserializer valueDeserializer, 
+            ITypeNameCreator nameCreator)
         {
             _valueDeserializer = valueDeserializer;
+            _nameCreator = nameCreator;
         }
 
         public object Deserialize(Type type, string name, string value)
@@ -18,6 +21,7 @@ namespace Supple.Xml.Collection
             Type elementType = CollectionTools.GetCollectionElementType(listBase);
             object instance = Activator.CreateInstance(type);
             MethodInfo method = listBase.GetMethod("Add");
+            string elementTypeName = _nameCreator.CreateName(elementType);
 
             // ignore open and close brackets 
             value = value.Substring(1, value.Length - 2);
@@ -26,7 +30,7 @@ namespace Supple.Xml.Collection
             {
                 object listItem = _valueDeserializer.Deserialize(
                     elementType,
-                    elementType.Name,
+                    elementTypeName,
                     listElementValue.Trim()
                     );
 

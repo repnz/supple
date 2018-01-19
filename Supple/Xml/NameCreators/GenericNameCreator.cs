@@ -31,6 +31,12 @@ namespace Supple.Xml.NameCreators
                 name = name.Substring(1);
             }
 
+            if (t.IsArray)
+            {
+                string arrayElementName = _nameCreator.CreateName(t.GetElementType());
+                name = $"ArrayOf{arrayElementName}";
+            }
+
             int index = name.IndexOf('`');
             return index == -1 ? name : name.Substring(0, index);
         }

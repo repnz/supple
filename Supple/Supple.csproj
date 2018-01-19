@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Xml\Collection\ArrayElementDeserializer.cs" />
+    <Compile Include="Xml\Collection\ArrayValueDeserializer.cs" />
     <Compile Include="Xml\Exceptions\ConstructorNotFoundException.cs" />
     <Compile Include="Xml\Exceptions\ConvertibleFormatException.cs" />
     <Compile Include="Xml\Exceptions\InterfaceTypeNotFoundException.cs" />

@@ -32,7 +32,7 @@ namespace Supple.Xml
             // Elemenet Deserializers
             delegator.ElementDeserializers.Add(interfaceDeserializer);
             delegator.ElementDeserializers.Add(new ElementValueDeserializer(delegator));
-
+            delegator.ElementDeserializers.Add(new ArrayElementDeserializer(delegator));
             delegator.ElementDeserializers.Add(new CollectionElementDeserializer(
                     delegator,
                     delegator
@@ -42,7 +42,8 @@ namespace Supple.Xml
 
             // Value Deserializers
             delegator.ValueDeserializers.Add(new ConvertableDeserializer());
-            delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator));
+            delegator.ValueDeserializers.Add(new ArrayValueDeserializer(delegator, delegator));
+            delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator, delegator));
             delegator.ValueDeserializers.Add(new ReferenceVariableDeserializer(referenceStore));
 
             // Type Name Creators
