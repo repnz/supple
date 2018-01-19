@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.References;
 using Supple.Xml;
+using Supple.Xml.Exceptions;
 
 namespace Supple.Tests
 {
@@ -55,6 +56,31 @@ namespace Supple.Tests
             Assert.IsTrue(deserialized.NamedElements.Count == 2);
             Assert.IsTrue(deserialized.NamedElements[0] == deserialized.ReferenceList[0]);
             Assert.IsTrue(deserialized.NamedElements[1] == deserialized.ReferenceList[1]);
+        }
+
+        [TestMethod]
+        public void ReferenceDoesNotExist_ThrowsException()
+        {
+            string objectXml =
+                "<ObjectWithReferenceContainer>" +
+                    "<NamedElements>" +
+                        "<NamedElement Name=\"NameA\" Value=\"ValueA\"/>" +
+                        "<NamedElement Name=\"NameB\" Value=\"ValueB\"/>" +
+                    "</NamedElements>" +
+                    "<Holder A=\"$NameA\" B=\"$DOES_NOT_EXIST\"/>" +
+                "</ObjectWithReferenceContainer>";
+
+            try
+            {
+                _tester.Deserialize<ObjectWithReferenceContainer>(objectXml);
+            }
+            catch (ReferenceNotFoundException e)
+            {
+                Assert.AreEqual("DOES_NOT_EXIST", e.Reference);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown");
         }
     }
 }

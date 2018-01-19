@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Supple.Xml.NameCreators
 {
-    class GenericNameCreator : ITypeNameCreator
+    public class GenericNameCreator : ITypeNameCreator
     {
         private readonly ITypeNameCreator _nameCreator;
 
