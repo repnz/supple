@@ -9,6 +9,7 @@ namespace Supple.Xml.Exceptions
 
         public InvalidElementException(XElement element)
         {
+            Element = element;
         }
 
         public InvalidElementException(XElement element, Exception inner) : base("", inner)

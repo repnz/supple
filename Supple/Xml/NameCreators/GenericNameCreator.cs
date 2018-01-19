@@ -12,32 +12,49 @@ namespace Supple.Xml.NameCreators
             _nameCreator = typeNameCreator;
         }
 
+        public GenericNameCreator()
+        {
+            _nameCreator = this;
+        }
+
         public bool IsMatch(Type type)
         {
-            return type.IsGenericType;
+            return true;
         }
 
         private string GetNameWithoutGenericArity(Type t)
         {
             string name = t.Name;
+            
+            if (t.IsInterface && name.StartsWith("I"))
+            {
+                name = name.Substring(1);
+            }
+
             int index = name.IndexOf('`');
             return index == -1 ? name : name.Substring(0, index);
         }
 
         public string CreateName(Type type)
         {
-            string typeName = GetNameWithoutGenericArity(type) + "Of";
+            string typeName = GetNameWithoutGenericArity(type);
 
-            Type[] genericArguments = type.GetGenericArguments();
-
-            foreach (Type genericArgument in genericArguments.Take(genericArguments.Length - 1))
+            if (type.IsGenericType)
             {
-                typeName += _nameCreator.CreateName(genericArgument);
-                typeName += "And";
-            }
+                typeName += "Of";
 
-            // Add Last Generic Argument 
-            typeName += _nameCreator.CreateName(genericArguments.Last());
+                Type[] genericArguments = type.GetGenericArguments();
+
+                foreach (Type genericArgument in genericArguments.Take(genericArguments.Length - 1))
+                {
+                    typeName += _nameCreator.CreateName(genericArgument);
+                    typeName += "And";
+                }
+
+                // Add Last Generic Argument 
+                typeName += _nameCreator.CreateName(genericArguments.Last());
+            }
+            
             return typeName;
         }
     }

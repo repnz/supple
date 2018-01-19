@@ -48,9 +48,6 @@ namespace Supple.Xml
 
             // Type Name Creators
             delegator.TypeNameCreators.Add(new GenericNameCreator(delegator));
-            delegator.TypeNameCreators.Add(new InterfaceNameCreator());
-            delegator.TypeNameCreators.Add(new DefaultTypeNameCreator());
-
             return delegator;
         }
         

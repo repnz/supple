@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
 using Supple.Xml;
-using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Supple.Tests
 {
@@ -16,6 +17,8 @@ namespace Supple.Tests
             StaticTypeResolver typeResolver = new StaticTypeResolver();
             typeResolver.AddType<TestInterfaceImpl1>();
             typeResolver.AddType<TestInterfaceImpl2>();
+            typeResolver.AddType<List<string>>();
+
             _tester = new SuppleDeserializerTester(new SuppleXmlDeserializer(typeResolver));
         }
 
@@ -39,6 +42,21 @@ namespace Supple.Tests
             {
                 InterfaceProperty = new TestInterfaceImpl2() { TwoProperty = "TwoValue" }
             });
+        }
+
+        [TestMethod]
+        public void GenericInterface_GetCorrectImplementation()
+        {
+            string objectXml =
+                "<EnumerableOfString Type=\"ListOfString\">" +
+                    "<String>Hi</String>"+
+                "</EnumerableOfString>";
+
+            IEnumerable<string> str = _tester.Deserialize<IEnumerable<string>>(objectXml);
+
+            Assert.IsNotNull(str);
+            Assert.AreEqual("Hi", str.First());
+
         }
     }
 }

@@ -68,9 +68,7 @@
     <Compile Include="Xml\ElementDeserializers\InterfaceDeserializer.cs" />
     <Compile Include="Xml\ElementDeserializers\PropertiesElementDeserializer.cs" />
     <Compile Include="Xml\ElementDeserializers\ReferenceAddingElementDeserializer.cs" />
-    <Compile Include="Xml\NameCreators\DefaultTypeNameCreator.cs" />
     <Compile Include="Xml\NameCreators\GenericNameCreator.cs" />
-    <Compile Include="Xml\NameCreators\InterfaceNameCreator.cs" />
     <Compile Include="Xml\References\IReferenceStore.cs" />
     <Compile Include="Xml\References\ReferenceStore.cs" />
     <Compile Include="Xml\SuppleXmlDeserializer.cs" />
