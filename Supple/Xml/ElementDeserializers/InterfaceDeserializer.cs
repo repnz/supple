@@ -27,7 +27,7 @@ namespace Supple.Xml
 
             if (typeNameAttr == null)
             {
-                throw new InterfaceTypeNotFoundException(element);
+                throw new InterfaceTypeNotFoundException(type, element);
             }
 
             string typeName = typeNameAttr.Value;

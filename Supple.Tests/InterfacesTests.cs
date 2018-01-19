@@ -3,6 +3,7 @@ using Supple.Tests.TestObjects;
 using Supple.Xml;
 using System.Linq;
 using System.Collections.Generic;
+using Supple.Xml.Exceptions;
 
 namespace Supple.Tests
 {
@@ -56,7 +57,26 @@ namespace Supple.Tests
 
             Assert.IsNotNull(str);
             Assert.AreEqual("Hi", str.First());
+        }
 
+        [TestMethod]
+        public void InterfaceProperty_WithoutType_ThrowsException()
+        {
+            string objectXml =
+                "<TestInterface>" +
+                "</TestInterface>";
+            try
+            {
+                _tester.Deserialize<ITestInterface>(objectXml);
+            }
+            catch (InterfaceTypeNotFoundException e)
+            {
+                Assert.AreEqual("TestInterface", e.Element.Name);
+                Assert.AreEqual(typeof(ITestInterface), e.InterfaceType);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown");
         }
     }
 }
