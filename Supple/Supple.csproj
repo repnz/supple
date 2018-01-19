@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Xml\Exceptions\ConstructorNotFoundException.cs" />
+    <Compile Include="Xml\Exceptions\ConvertibleFormatException.cs" />
     <Compile Include="Xml\Exceptions\InterfaceTypeNotFoundException.cs" />
     <Compile Include="Xml\Exceptions\InvalidElementException.cs" />
     <Compile Include="IRuntimeTypeResolver.cs" />

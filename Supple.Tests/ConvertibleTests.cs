@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
 using Supple.Xml;
+using Supple.Xml.Exceptions;
 using System;
 
 namespace Supple.Tests
@@ -40,6 +41,30 @@ namespace Supple.Tests
             Assert.AreEqual(103.456, obj.DoubleMember);
             Assert.AreEqual<byte>(104, obj.ByteMember);
             Assert.AreEqual("MyAwsomeString", obj.StringMember);
+        }
+
+        [TestMethod]
+        public void ConvertibleError_ThrowsConvertibleFormatException()
+        {
+            string objectXml =
+                "<ConvertibleMembersTestObject>" +
+                    "<IntMember>ori</IntMember>" +
+                "</ConvertibleMembersTestObject>";
+
+            try
+            {
+                var obj = _tester.Deserialize<ConvertibleMembersTestObject>(objectXml);
+            }
+            catch (ConvertibleFormatException e)
+            {
+                Assert.AreEqual(typeof(Int32), e.ExpectedType);
+                Assert.AreEqual("ori", e.Value);
+                Assert.AreEqual("IntMember", e.Name);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown!");
+            
         }
 
     }

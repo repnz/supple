@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Supple.Xml.Exceptions
 {
-    class InterfaceTypeNotFoundException : InvalidElementException
+    public class InterfaceTypeNotFoundException : InvalidElementException
     {
         public InterfaceTypeNotFoundException(XElement element) : base(element)
         {

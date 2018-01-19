@@ -2,7 +2,7 @@
 
 namespace Supple.Xml.Exceptions
 {
-    class PropertyNotFoundException : Exception
+    public class PropertyNotFoundException : Exception
     {
         public string Name { get; }
         public Type Type { get; }

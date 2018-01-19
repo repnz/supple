@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supple.Xml.Exceptions;
+using System;
 
 namespace Supple.Xml
 {
@@ -6,7 +7,15 @@ namespace Supple.Xml
     {
         public object Deserialize(Type type, string name, string value)
         {
-            return Convert.ChangeType(value, type);
+            try
+            {
+                return Convert.ChangeType(value, type);
+            }
+            catch (FormatException e)
+            {
+                throw new ConvertibleFormatException(name, value, type, e);
+            }
+            
         }
 
         public bool IsMatch(Type type, string name, string value)

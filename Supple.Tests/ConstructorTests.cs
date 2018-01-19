@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
 using Supple.Xml;
+using Supple.Xml.Exceptions;
+using System;
 
 namespace Supple.Tests
 {
@@ -63,5 +65,27 @@ namespace Supple.Tests
             Assert.AreEqual(obj.ParamA, "ParamA");
             Assert.AreEqual(obj.ParamB, "ParamB");
         }
+
+        [TestMethod]
+        public void MissingMatchingConstructor_ThrowsConstructorNotFoundException()
+        {
+            string objectXml =
+                "<ConstructorObject>" +
+                    "<ParamB>ParamB</ParamB>" +
+                "</ConstructorObject>";
+
+            try
+            {
+                _tester.Deserialize<ConstructorObject>(objectXml);
+            }
+            catch (ConstructorNotFoundException e)
+            {
+                Assert.AreEqual(typeof(ConstructorObject), e.Type);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown!");
+        }
+
     }
 }

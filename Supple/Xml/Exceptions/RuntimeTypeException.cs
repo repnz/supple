@@ -2,7 +2,7 @@
 
 namespace Supple.Xml.Exceptions
 {
-    class RuntimeTypeException : Exception
+    public class RuntimeTypeException : Exception
     {
         public string TypeName { get; }
 
