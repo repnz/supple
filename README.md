@@ -5,7 +5,7 @@ A .NET Library that allows deserialization of complex XML objects. the main moti
 ## Features
 - Deserialization of interface properties
 - References between deserialized objects
-- ...
+- Calling classes with constructors
 
 ## Usage
 Say you have this printing application, which has an `IPrinter` interface in it 
@@ -17,8 +17,13 @@ interface IPrinter
 
 class StringPrinter : IPrinter
 {
-    public string StringToWrite { get; set; }
+    public string StringToWrite { get; }
     
+    public StringPrinter(string stringToWrite)
+    {
+		StringToWrite = stringToWrite;
+    }
+
     public void Print()
     {
         Console.WriteLine(StringToWrite);
@@ -27,8 +32,13 @@ class StringPrinter : IPrinter
 
 class FilePrinter : IPrinter
 {
-    public string FilePath { get; set; }
+    public string FilePath { get;}
     
+    public FilePrinter(string filePath)
+    {
+        FilePath = filePath;
+    }
+
     public void Print()
     {
         Console.WriteLine(File.ReadAllText(FilePath));
@@ -74,6 +84,5 @@ PrintApp.Run(printers);
 ```
 
 ## Backlog
-- Support classes with constructors
 - Provide API for custom user deserialization
-- Remove the need for StaticTypeResolver
+- Implement DynamicTypeResolver
