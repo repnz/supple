@@ -3,6 +3,7 @@ using Supple.Xml.ElementDeserializers;
 using Supple.Xml.Exceptions;
 using Supple.Xml.NameCreators;
 using Supple.Xml.References;
+using Supple.Xml.ValueDeserializers;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
@@ -46,6 +47,7 @@ namespace Supple.Xml
             delegator.ElementDeserializers.Add(propertiesDeserializer);
 
             // Value Deserializers
+            //delegator.ValueDeserializers.Add(new DateTimeValueDeserializer());
             delegator.ValueDeserializers.Add(new ConvertableDeserializer());
             delegator.ValueDeserializers.Add(new ArrayValueDeserializer(delegator, delegator));
             delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator, delegator));

@@ -1,7 +1,7 @@
 ﻿using Supple.Xml.Exceptions;
 using System;
 
-namespace Supple.Xml
+namespace Supple.Xml.ValueDeserializers
 {
     class ConvertableDeserializer : IValueDeserializer
     {

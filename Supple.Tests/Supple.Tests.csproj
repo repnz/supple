@@ -53,6 +53,7 @@
     <Compile Include="BasicTests.cs" />
     <Compile Include="CollectionsTests.cs" />
     <Compile Include="ConvertibleTests.cs" />
+    <Compile Include="DateTests.cs" />
     <Compile Include="EnumerableExtentions.cs" />
     <Compile Include="GenericNameCreatorTests.cs" />
     <Compile Include="InterfacesTests.cs" />

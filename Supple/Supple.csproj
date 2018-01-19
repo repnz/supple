@@ -76,6 +76,7 @@
     <Compile Include="Xml\References\ReferenceStore.cs" />
     <Compile Include="Xml\SuppleXmlDeserializer.cs" />
     <Compile Include="Xml\ValueDeserializers\ConvertableDeserializer.cs" />
+    <Compile Include="Xml\ValueDeserializers\DateTimeValueDeserializer.cs" />
     <Compile Include="Xml\ValueDeserializers\ReferenceVariableDeserializer.cs" />
   </ItemGroup>
   <ItemGroup />
