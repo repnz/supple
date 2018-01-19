@@ -4,33 +4,33 @@ namespace Supple.Xml.Exceptions
 {
     public class PropertyNotFoundException : Exception
     {
-        public string Name { get; }
-        public Type Type { get; }
+        public string PropertyName { get; }
+        public Type BaseType { get; }
 
-        public PropertyNotFoundException(string name, Type type)
+        public PropertyNotFoundException(string propertyName, Type baseType)
         {
-            Name = name;
-            Type = type;
+            PropertyName = propertyName;
+            BaseType = baseType;
         }
 
-        public PropertyNotFoundException(string name, Type type, string message) : base(message)
+        public PropertyNotFoundException(string propertyName, Type baseType, string message) : base(message)
         {
-            Name = name;
-            Type = type;
+            PropertyName = propertyName;
+            BaseType = baseType;
         }
 
-        public PropertyNotFoundException(string name, Type type, string message, Exception innerException) : base(message, innerException)
+        public PropertyNotFoundException(string propertyName, Type baseType, string message, Exception innerException) : base(message, innerException)
         {
-            Name = name;
-            Type = type;
+            PropertyName = propertyName;
+            BaseType = baseType;
         }
 
-        public PropertyNotFoundException(string name, Type type, Exception innerException) : base("", innerException)
+        public PropertyNotFoundException(string propertyName, Type baseType, Exception innerException) : base("", innerException)
         {
-            Name = name;
-            Type = type;
+            PropertyName = propertyName;
+            BaseType = baseType;
         }
 
-        public override string Message => $"Cannot find property {Name} in type {Type} {base.Message}";
+        public override string Message => $"Cannot find property {PropertyName} in type {BaseType.Name} {base.Message}";
     }
 }

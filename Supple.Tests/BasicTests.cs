@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
 using Supple.Xml;
+using Supple.Xml.Exceptions;
 
 namespace Supple.Tests
 {
@@ -13,8 +14,6 @@ namespace Supple.Tests
         public void Initialize()
         {
             StaticTypeResolver typeResolver = new StaticTypeResolver();
-            typeResolver.AddType<TestInterfaceImpl1>();
-            typeResolver.AddType<TestInterfaceImpl2>();
             _tester = new SuppleDeserializerTester(new SuppleXmlDeserializer(typeResolver));
         }
 
@@ -34,8 +33,8 @@ namespace Supple.Tests
         {
             string objectXml =
                 "<StringPropertiesTestObject>" +
-                "<Name>MyName</Name>" +
-                "<Value>MyValue</Value>" +
+                    "<Name>MyName</Name>" +
+                    "<Value>MyValue</Value>" +
                 "</StringPropertiesTestObject>";
 
             var obj = _tester.Deserialize<StringPropertiesTestObject>(objectXml);
@@ -77,6 +76,52 @@ namespace Supple.Tests
                 "</SubPropertiesTestObject>";
 
             TestSubPropertiesTestObject(objectXml);
+        }
+
+        [TestMethod]
+        public void PropertyNotFound_ThrowsException()
+        {
+            string objectXml =
+              "<StringPropertiesTestObject>" +
+                  "<Name>MyName</Name>" +
+                  "<Value>MyValue</Value>" +
+                  "<SomeProp>SOMEVAL</SomeProp>"+
+              "</StringPropertiesTestObject>";
+
+            try
+            {
+                var obj = _tester.Deserialize<StringPropertiesTestObject>(objectXml);
+            }
+            catch (PropertyNotFoundException e)
+            {
+                Assert.AreEqual("SomeProp", e.PropertyName);
+                Assert.AreEqual(typeof(StringPropertiesTestObject), e.BaseType);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown");
+        }
+
+        [TestMethod]
+        public void PropertyWithoutPublicSetter_ThrowsException()
+        {
+            string objectXml =
+              "<PrivatePropertyObject>" +
+                  "<SomeProperty>Something</SomeProperty>" +
+              "</PrivatePropertyObject>";
+
+            try
+            {
+                var obj = _tester.Deserialize<PrivatePropertyObject>(objectXml);
+            }
+            catch (PropertyNotFoundException e)
+            {
+                Assert.AreEqual("SomeProperty", e.PropertyName);
+                Assert.AreEqual(typeof(PrivatePropertyObject), e.BaseType);
+                return;
+            }
+
+            Assert.Fail("Exception was not thrown");
         }
     }
 }
