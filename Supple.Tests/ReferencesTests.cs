@@ -34,7 +34,27 @@ namespace Supple.Tests
             Assert.IsTrue(deserialized.NamedElements.Count == 2);
             Assert.IsTrue(deserialized.NamedElements[0] == deserialized.Holder.A);
             Assert.IsTrue(deserialized.NamedElements[1] == deserialized.Holder.B);
+        }
 
+        [TestMethod]
+        public void ReferenceList_GetReference()
+        {
+            string objectXml =
+                "<ObjectWithReferenceList>" +
+                    "<NamedElements>" +
+                        "<NamedElement Name=\"A\" Value=\"ValueA\"/>" +
+                        "<NamedElement Name=\"B\" Value=\"ValueB\"/>" +
+                    "</NamedElements>" +
+                    "<ReferenceList>[$A, $B]</ReferenceList>" +
+                "</ObjectWithReferenceList>";
+
+            var deserialized = _tester.Deserialize<ObjectWithReferenceList>(objectXml);
+            Assert.IsNotNull(deserialized);
+            Assert.IsNotNull(deserialized.NamedElements);
+            Assert.IsNotNull(deserialized.ReferenceList);
+            Assert.IsTrue(deserialized.NamedElements.Count == 2);
+            Assert.IsTrue(deserialized.NamedElements[0] == deserialized.ReferenceList[0]);
+            Assert.IsTrue(deserialized.NamedElements[1] == deserialized.ReferenceList[1]);
         }
     }
 }

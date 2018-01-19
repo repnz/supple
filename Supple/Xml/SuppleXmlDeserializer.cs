@@ -42,10 +42,10 @@ namespace Supple.Xml
             delegator.ElementDeserializers.Add(propertiesDeserializer);
 
             // Value Deserializers
-            delegator.ValueDeserializers.Add(new ReferenceVariableDeserializer(referenceStore));
             delegator.ValueDeserializers.Add(new ConvertableDeserializer());
             delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator));
-            
+            delegator.ValueDeserializers.Add(new ReferenceVariableDeserializer(referenceStore));
+
             // Type Name Creators
             delegator.TypeNameCreators.Add(new GenericNameCreator(delegator));
             delegator.TypeNameCreators.Add(new InterfaceNameCreator());

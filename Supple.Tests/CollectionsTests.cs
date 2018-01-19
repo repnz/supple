@@ -85,7 +85,7 @@ namespace Supple.Tests
         {
             string objectXml =
                 "<ObjectWithListProperty>" +
-                    "<Elements>HelloWorld1,HelloWorld2,HelloWorld3</Elements>" +
+                    "<Elements>[HelloWorld1, HelloWorld2, HelloWorld3]</Elements>" +
                 "</ObjectWithListProperty>";
 
 
@@ -100,7 +100,7 @@ namespace Supple.Tests
         {
             string objectXml =
                 "<ObjectWithListProperty " +
-                "Elements=\"HelloWorld1,HelloWorld2,HelloWorld3\"/>";
+                "Elements=\"[HelloWorld1, HelloWorld2, HelloWorld3]\"/>";
 
 
             _tester.TestDeserialization(objectXml, new ObjectWithListProperty

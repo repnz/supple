@@ -19,12 +19,15 @@ namespace Supple.Xml.Collection
             object instance = Activator.CreateInstance(type);
             MethodInfo method = listBase.GetMethod("Add");
 
+            // ignore open and close brackets 
+            value = value.Substring(1, value.Length - 2);
+
             foreach (string listElementValue in value.Split(','))
             {
                 object listItem = _valueDeserializer.Deserialize(
                     elementType,
                     elementType.Name,
-                    listElementValue
+                    listElementValue.Trim()
                     );
 
                 method.Invoke(instance, new object[] { listItem });
@@ -34,7 +37,9 @@ namespace Supple.Xml.Collection
         }
         public bool IsMatch(Type type, string name, string value)
         {
-            return CollectionTools.HasCollectionBase(type);
+            return CollectionTools.HasCollectionBase(type) && 
+                value.StartsWith("[") && 
+                value.EndsWith("]");
         }
     }
 }
