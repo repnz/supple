@@ -18,6 +18,16 @@ namespace Supple.Tests
         }
 
         [TestMethod]
+        public void UseDate_Deserialize()
+        {
+            string objectXml = "<DateTime>1997/07/31 10:00:00</DateTime>";
+
+            DateTime date = _tester.Deserialize<DateTime>(objectXml);
+
+            Assert.AreEqual(new DateTime(1997, 7, 31, 10, 0, 0), date);
+        }
+
+        [TestMethod]
         public void ConvertibleMembers_ConvertMembers()
         {
             string objectXml =

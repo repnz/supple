@@ -19,9 +19,12 @@ namespace Supple.Xml.ElementDeserializers
             if (attribute.Name.LocalName == "Name")
             {
                 _referenceStore.Add(attribute.Value, instance);
-            }
 
+                if (instance.GetType().GetProperty("Name") == null) { return; }
+            }
+            
             base.HandleAttribute(instance, attribute);
+            
         }
 
         protected override void HandleElement(object instance, XElement element)
@@ -29,6 +32,8 @@ namespace Supple.Xml.ElementDeserializers
             if (element.Name.LocalName == "Name" && !element.HasAttributes && !element.HasElements)
             {
                 _referenceStore.Add(element.Value, instance);
+
+                if (instance.GetType().GetProperty("Name") == null) { return; }
             }
 
             base.HandleElement(instance, element);

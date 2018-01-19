@@ -47,7 +47,6 @@ namespace Supple.Xml
             delegator.ElementDeserializers.Add(propertiesDeserializer);
 
             // Value Deserializers
-            //delegator.ValueDeserializers.Add(new DateTimeValueDeserializer());
             delegator.ValueDeserializers.Add(new ConvertableDeserializer());
             delegator.ValueDeserializers.Add(new ArrayValueDeserializer(delegator, delegator));
             delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator, delegator));
