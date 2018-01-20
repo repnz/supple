@@ -53,5 +53,22 @@ namespace Supple.Tests
 
             Assert.IsNotNull(objects);
         }
+
+        [TestMethod]
+        public void MultiDimensionalArray_Deserialize()
+        {
+            string objectXml =
+                "<ArrayOfArrayOfInt32>" +
+                    "<ArrayOfInt32>[0,1]</ArrayOfInt32> "+
+                    "<ArrayOfInt32>[7,8]</ArrayOfInt32>" +
+                "</ArrayOfArrayOfInt32>";
+
+            int[][] arr = _tester.Deserialize<int[][]>(objectXml);
+
+            Assert.AreEqual(0, arr[0][0]);
+            Assert.AreEqual(1, arr[0][1]);
+            Assert.AreEqual(7, arr[1][0]);
+            Assert.AreEqual(8, arr[1][1]);
+        }
     }
 }
