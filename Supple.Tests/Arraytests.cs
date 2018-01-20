@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
 using Supple.Xml;
+using System.Collections.Generic;
 
 namespace Supple.Tests
 {
@@ -69,6 +70,23 @@ namespace Supple.Tests
             Assert.AreEqual(1, arr[0][1]);
             Assert.AreEqual(7, arr[1][0]);
             Assert.AreEqual(8, arr[1][1]);
+        }
+
+        [TestMethod]
+        public void ArrayOfList_Deserialize()
+        {
+            string objectXml =
+                "<ArrayOfListOfInt32>" +
+                    "<ListOfInt32>[0,1]</ListOfInt32> " +
+                    "<ListOfInt32>[7,8]</ListOfInt32>" +
+                "</ArrayOfListOfInt32>";
+
+            List<int>[] arrayOfLists = _tester.Deserialize<List<int>[]>(objectXml);
+
+            Assert.AreEqual(0, arrayOfLists[0][0]);
+            Assert.AreEqual(1, arrayOfLists[0][1]);
+            Assert.AreEqual(7, arrayOfLists[1][0]);
+            Assert.AreEqual(8, arrayOfLists[1][1]);
         }
     }
 }
