@@ -2,7 +2,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace Supple.Xml
+namespace Supple.Xml.ElementDeserializers
 {
     public class InterfaceDeserializer : IElementDeserializer
     {

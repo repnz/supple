@@ -4,10 +4,7 @@ using System.Xml.Linq;
 
 namespace Supple.Xml
 {
-    public class DelegatorDeserializer : 
-        IElementDeserializer, 
-        IValueDeserializer, 
-        ITypeNameCreator
+    public class DelegatorDeserializer : IDelegator
     {
         public IList<IValueDeserializer> ValueDeserializers { get; }
         public IList<ITypeNameCreator> TypeNameCreators { get; }

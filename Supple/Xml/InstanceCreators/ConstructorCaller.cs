@@ -10,14 +10,11 @@ namespace Supple.Xml.ElementDeserializers
 {
     class ConstructorCaller : IInstanceCreator
     {
-        protected IElementDeserializer ElementDeserializer { get; }
-        protected IValueDeserializer ValueDeserializer { get; }
+        private readonly IDelegator _delegator;
 
-        public ConstructorCaller(IElementDeserializer elementDeserializer, 
-            IValueDeserializer valueDeserializer)
+        public ConstructorCaller(IDelegator delegator)
         {
-            ElementDeserializer = elementDeserializer;
-            ValueDeserializer = valueDeserializer;
+            _delegator = delegator;
         }
 
         public object CreateInstance(Type type, XElement element)
@@ -103,7 +100,7 @@ namespace Supple.Xml.ElementDeserializers
 
                 if (TryGetElementIgnoreCase(element, paramName, out XElement subElement))
                 {
-                    object paramDeserialized = ElementDeserializer.Deserialize(
+                    object paramDeserialized = _delegator.Deserialize(
                         parameter.ParameterType,
                         subElement
                         );
@@ -115,7 +112,7 @@ namespace Supple.Xml.ElementDeserializers
                 
                 if (TryGetAttributeIgnoreCase(element, paramName, out XAttribute subAttribute))
                 {
-                    object paramDeserialized = ValueDeserializer.Deserialize(
+                    object paramDeserialized = _delegator.Deserialize(
                             parameter.ParameterType,
                             subAttribute.Name.LocalName,
                             subAttribute.Value

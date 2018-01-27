@@ -6,13 +6,11 @@ namespace Supple.Xml.Collection
 {
     class ArrayValueDeserializer : IValueDeserializer
     {
-        private readonly IValueDeserializer _deserializer;
-        private readonly ITypeNameCreator _nameCreator;
+        private readonly IDelegator _delegator;
 
-        public ArrayValueDeserializer(IValueDeserializer deserializer, ITypeNameCreator nameCreator)
+        public ArrayValueDeserializer(IDelegator delegator)
         {
-            _deserializer = deserializer;
-            _nameCreator = nameCreator;
+            _delegator = delegator;
         }
 
         public object Deserialize(Type type, string name, string value)
@@ -22,11 +20,11 @@ namespace Supple.Xml.Collection
             int arrayLength = value.Count(c => c == ',') + 1;
             IList arr = (IList)Activator.CreateInstance(type, new object[] { arrayLength });
             int curIndex = 0;
-            string elementName = _nameCreator.CreateName(elementType);
+            string elementName = _delegator.CreateName(elementType);
 
             foreach (string elementValue in value.Split(','))
             {
-                arr[curIndex] = _deserializer.Deserialize(elementType, elementName, elementValue);
+                arr[curIndex] = _delegator.Deserialize(elementType, elementName, elementValue);
                 curIndex++;
             }
 

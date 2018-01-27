@@ -1,9 +1,13 @@
 ﻿using Supple.Xml.Collection;
 using Supple.Xml.ElementDeserializers;
+using Supple.Xml.ElementDeserializers.Handlers.Collection;
+using Supple.Xml.ElementDeserializers.Handlers.PropertyAssign;
+using Supple.Xml.ElementDeserializers.Handlers.References;
 using Supple.Xml.Exceptions;
 using Supple.Xml.NameCreators;
 using Supple.Xml.References;
 using Supple.Xml.ValueDeserializers;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
@@ -26,29 +30,27 @@ namespace Supple.Xml
         private DelegatorDeserializer CreateDelegator(IRuntimeTypeResolver resolver)
         {
             DelegatorDeserializer delegator = new DelegatorDeserializer();
-
-            var interfaceDeserializer = new InterfaceDeserializer(resolver, delegator);
             var referenceStore = new ReferenceStore();
-            var propertiesDeserializer = new ReferenceAddingElementDeserializer(
-                delegator,
-                delegator,
-                referenceStore
-                );
 
-            // Elemenet Deserializers
-            delegator.ElementDeserializers.Add(interfaceDeserializer);
+            delegator.ElementDeserializers.Add(new InterfaceDeserializer(resolver, delegator));
             delegator.ElementDeserializers.Add(new ElementValueDeserializer(delegator));
             delegator.ElementDeserializers.Add(new ArrayElementDeserializer(delegator));
-            delegator.ElementDeserializers.Add(new CollectionElementDeserializer(
-                    delegator,
-                    delegator
-                ));
 
-            delegator.ElementDeserializers.Add(propertiesDeserializer);
+            delegator.ElementDeserializers.Add(
+                    new HandlersCallerElementDeserializer(
+                            new List<IElementHandlerFactory>()
+                            {
+                                new ReferenceAddingHandlerFactory(referenceStore),
+                                new CollectionElementHandlerFactory(delegator),
+                                new PropertyElementHandlerFactory(delegator)
+                            },
+                            delegator
+                        )
+                );
 
             // Value Deserializers
             delegator.ValueDeserializers.Add(new ConvertableDeserializer());
-            delegator.ValueDeserializers.Add(new ArrayValueDeserializer(delegator, delegator));
+            delegator.ValueDeserializers.Add(new ArrayValueDeserializer(delegator));
             delegator.ValueDeserializers.Add(new CollectionValueDeserializer(delegator, delegator));
             delegator.ValueDeserializers.Add(new ReferenceVariableDeserializer(referenceStore));
 
