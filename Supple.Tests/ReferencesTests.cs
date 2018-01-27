@@ -81,5 +81,23 @@ namespace Supple.Tests
 
             Assert.Fail("Exception was not thrown");
         }
+
+        [TestMethod]
+        public void ListReference_AddsReference()
+        {
+            string objectXml = 
+                "<ObjectWithReferenceList>" +
+                    "<NamedElements Name=\"MyList\">" +
+                        "<NamedElement Name=\"A\" Value=\"ValueA\"/>" +
+                        "<NamedElement Name=\"B\" Value=\"ValueB\"/>" +
+                    "</NamedElements>" +
+                    "<ReferenceList>$MyList</ReferenceList>" +
+                "</ObjectWithReferenceList>";
+
+            var obj = _tester.Deserialize<ObjectWithReferenceList>(objectXml);
+
+            Assert.AreSame(obj.NamedElements, obj.ReferenceList);
+
+        }
     }
 }
