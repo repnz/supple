@@ -3,7 +3,8 @@
 ## What is Supple?
 A .NET Library that allows deserialization of complex XML objects. the main motivation of this library is loading application configuration that allows dependency injection in the configuration file
 ## Features
-- Deserialization of interface properties
+- Field / Property Assignment
+- Deserialization of interfaces 
 - References between deserialized objects
 - Calling classes with constructors
 
