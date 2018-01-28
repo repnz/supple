@@ -91,9 +91,9 @@ namespace Supple.Tests
             {
                 var obj = _tester.Deserialize<StringPropertiesTestObject>(objectXml);
             }
-            catch (PropertyNotFoundException e)
+            catch (MemberNotFoundException e)
             {
-                Assert.AreEqual("SomeProp", e.PropertyName);
+                Assert.AreEqual("SomeProp", e.MemberName);
                 Assert.AreEqual(typeof(StringPropertiesTestObject), e.BaseType);
                 return;
             }
@@ -113,9 +113,9 @@ namespace Supple.Tests
             {
                 var obj = _tester.Deserialize<PrivatePropertyObject>(objectXml);
             }
-            catch (PropertyNotFoundException e)
+            catch (MemberNotFoundException e)
             {
-                Assert.AreEqual("SomeProperty", e.PropertyName);
+                Assert.AreEqual("SomeProperty", e.MemberName);
                 Assert.AreEqual(typeof(PrivatePropertyObject), e.BaseType);
                 return;
             }

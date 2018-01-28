@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Reflection\Member.cs" />
+    <Compile Include="Reflection\Field.cs" />
+    <Compile Include="Reflection\Property.cs" />
     <Compile Include="Xml\Collection\ArrayElementDeserializer.cs" />
     <Compile Include="Xml\Collection\ArrayValueDeserializer.cs" />
     <Compile Include="Xml\ElementDeserializers\Handlers\Collection\CollectionElementHandler.cs" />
     <Compile Include="Xml\ElementDeserializers\Handlers\Collection\CollectionElementHandlerFactory.cs" />
-    <Compile Include="Xml\ElementDeserializers\Handlers\PropertyAssign\PropertyElementHandler.cs" />
-    <Compile Include="Xml\ElementDeserializers\Handlers\PropertyAssign\PropertyElementHandlerFactory.cs" />
+    <Compile Include="Xml\ElementDeserializers\Handlers\MemberAssign\MemberElementHandler.cs" />
+    <Compile Include="Xml\ElementDeserializers\Handlers\MemberAssign\MemberElementHandlerFactory.cs" />
     <Compile Include="Xml\ElementDeserializers\Handlers\References\ReferenceAddingHandler.cs" />
     <Compile Include="Xml\ElementDeserializers\Handlers\References\ReferenceAddingHandlerFactory.cs" />
     <Compile Include="Xml\ElementDeserializers\HandleStatus.cs" />
@@ -63,7 +66,7 @@
     <Compile Include="Xml\Collection\CollectionTools.cs" />
     <Compile Include="Xml\Collection\CollectionValueDeserializer.cs" />
     <Compile Include="Xml\DelegatorDeserializer.cs" />
-    <Compile Include="Xml\Exceptions\PropertyNotFoundException.cs" />
+    <Compile Include="Xml\Exceptions\MemberNotFoundException.cs" />
     <Compile Include="Xml\Exceptions\ReferenceNotFoundException.cs" />
     <Compile Include="Xml\Exceptions\RuntimeTypeException.cs" />
     <Compile Include="Xml\Exceptions\UnexpectedElementException.cs" />
@@ -85,6 +88,8 @@
     <Compile Include="Xml\ValueDeserializers\ConvertableDeserializer.cs" />
     <Compile Include="Xml\ValueDeserializers\ReferenceVariableDeserializer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Xml\ElementDeserializers\Handlers\Dictionary\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -54,6 +54,7 @@
     <Compile Include="CollectionsTests.cs" />
     <Compile Include="ConvertibleTests.cs" />
     <Compile Include="EnumerableExtentions.cs" />
+    <Compile Include="FieldTests.cs" />
     <Compile Include="GenericNameCreatorTests.cs" />
     <Compile Include="InterfacesTests.cs" />
     <Compile Include="ReferencesTests.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="TestObjects\ConstructorObject.cs" />
     <Compile Include="TestObjects\ConvertibleMembersTestObject.cs" />
     <Compile Include="ConstructorTests.cs" />
+    <Compile Include="TestObjects\FieldObject.cs" />
     <Compile Include="TestObjects\ListTestObject.cs" />
     <Compile Include="TestObjects\ObjectWithListProperty.cs" />
     <Compile Include="TestObjects\PrivatePropertyObject.cs" />

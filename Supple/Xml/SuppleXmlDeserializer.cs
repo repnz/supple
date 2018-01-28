@@ -1,7 +1,7 @@
 ﻿using Supple.Xml.Collection;
 using Supple.Xml.ElementDeserializers;
 using Supple.Xml.ElementDeserializers.Handlers.Collection;
-using Supple.Xml.ElementDeserializers.Handlers.PropertyAssign;
+using Supple.Xml.ElementDeserializers.Handlers.MemberAssign;
 using Supple.Xml.ElementDeserializers.Handlers.References;
 using Supple.Xml.Exceptions;
 using Supple.Xml.NameCreators;
@@ -42,7 +42,7 @@ namespace Supple.Xml
                             {
                                 new ReferenceAddingHandlerFactory(referenceStore),
                                 new CollectionElementHandlerFactory(delegator),
-                                new PropertyElementHandlerFactory(delegator)
+                                new MemberElementHandlerFactory(delegator)
                             },
                             delegator
                         )

@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Xml.Linq;
 
-namespace Supple.Xml.ElementDeserializers.Handlers.PropertyAssign
+namespace Supple.Xml.ElementDeserializers.Handlers.MemberAssign
 {
-    class PropertyElementHandlerFactory : IElementHandlerFactory
+    class MemberElementHandlerFactory : IElementHandlerFactory
     {
         private readonly IDelegator _delegator;
 
-        public PropertyElementHandlerFactory(IDelegator delegator)
+        public MemberElementHandlerFactory(IDelegator delegator)
         {
             _delegator = delegator;
         }
 
         public IElementHandler CreateElementHandler(object obj)
         {
-            return new PropertyElementHandler(obj, _delegator);
+            return new MemberElementHandler(obj, _delegator);
         }
 
         public bool IsMatch(Type type, XElement element)
