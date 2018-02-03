@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Collections;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
-using System;
 using System.Collections.Generic;
 
 namespace Supple.Tests

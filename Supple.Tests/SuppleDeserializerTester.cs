@@ -1,11 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Collections;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
+using Supple.Deserialization;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml.Linq;
+using Supple.TypeResolvers;
 
 namespace Supple.Tests
 {

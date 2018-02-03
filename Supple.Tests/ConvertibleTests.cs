@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
-using Supple.Xml.Exceptions;
+using Supple.Deserialization.Exceptions;
 using System;
 
 namespace Supple.Tests
@@ -55,7 +54,7 @@ namespace Supple.Tests
         {
             string objectXml =
                 "<ConvertibleMembersTestObject>" +
-                    "<IntMember>ori</IntMember>" +
+                    "<IntMember>WRONG_TYPE</IntMember>" +
                 "</ConvertibleMembersTestObject>";
 
             try
@@ -65,7 +64,7 @@ namespace Supple.Tests
             catch (ConvertibleFormatException e)
             {
                 Assert.AreEqual(typeof(Int32), e.ExpectedType);
-                Assert.AreEqual("ori", e.Value);
+                Assert.AreEqual("WRONG_TYPE", e.Value);
                 Assert.AreEqual("IntMember", e.Name);
                 return;
             }

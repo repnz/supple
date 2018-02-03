@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
 using System.Linq;
 using System.Collections.Generic;
-using Supple.Xml.Exceptions;
+using Supple.Deserialization.Exceptions;
 
 namespace Supple.Tests
 {
@@ -66,7 +65,7 @@ namespace Supple.Tests
             }
             catch (InterfaceTypeNotFoundException e)
             {
-                Assert.AreEqual("TestInterface", e.Element.Name);
+                Assert.AreEqual("TestInterface", e.Node.Name);
                 Assert.AreEqual(typeof(ITestInterface), e.InterfaceType);
                 return;
             }

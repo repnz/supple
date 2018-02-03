@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
-using Supple.Xml.NameCreators;
+using Supple.Deserialization.NameCreators;
 using System.Collections.Generic;
 
 namespace Supple.Tests

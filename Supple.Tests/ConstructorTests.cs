@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
-using Supple.Xml.Exceptions;
-using System;
+using Supple.Deserialization.Exceptions;
 
 namespace Supple.Tests
 {
@@ -77,7 +75,7 @@ namespace Supple.Tests
             }
             catch (ConstructorNotFoundException e)
             {
-                Assert.AreEqual(typeof(ConstructorObject), e.Type);
+                Assert.AreEqual(typeof(ConstructorObject), e.NodeType);
                 return;
             }
 

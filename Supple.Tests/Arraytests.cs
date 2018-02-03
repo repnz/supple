@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
 using System.Collections.Generic;
 
 namespace Supple.Tests
@@ -24,6 +23,7 @@ namespace Supple.Tests
             var obj = _tester.Deserialize<int[]>(objectXml);
 
             Assert.IsNotNull(obj);
+            Assert.AreEqual(2, obj.Length);
             Assert.AreEqual(1, obj[0]);
             Assert.AreEqual(2, obj[1]);
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supple.Tests.TestObjects;
-using Supple.Xml;
-using Supple.Xml.Exceptions;
+using Supple.Deserialization.Exceptions;
 
 namespace Supple.Tests
 {
