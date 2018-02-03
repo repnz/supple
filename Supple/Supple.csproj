@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Deserialization\NameCreators\KeyValuePairNameCreator.cs" />
     <Compile Include="Deserialization\ValueNode.cs" />
     <Compile Include="Deserialization\Context\ContextNodeDeserializer.cs" />
     <Compile Include="Deserialization\Context\Handlers\Collection\CollectionNodeHandlerFactory.cs" />
@@ -92,8 +93,6 @@
     <Compile Include="Deserialization\References\ReferenceStore.cs" />
     <Compile Include="Deserialization\SuppleXmlDeserializer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Deserialization\Context\Handlers\Dictionary\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

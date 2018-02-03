@@ -108,8 +108,8 @@ namespace Supple.Tests
         {
             string objectXml =
                 "<DictionaryOfStringAndString>" +
-                        "<KeyValuePairOfStringAndString Key=\"NameA\" Value=\"ValueA\"/>" +
-                        "<KeyValuePairOfStringAndString Key=\"NameB\" Value=\"ValueB\"/>" +
+                        "<Pair Key=\"NameA\" Value=\"ValueA\"/>" +
+                        "<Pair Key=\"NameB\" Value=\"ValueB\"/>" +
                     "</DictionaryOfStringAndString>";
 
             var obj = _tester.Deserialize<Dictionary<string, string>>(objectXml);

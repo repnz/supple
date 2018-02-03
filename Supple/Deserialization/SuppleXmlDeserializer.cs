@@ -59,6 +59,7 @@ namespace Supple.Deserialization
                 );
 
             // Type Name Creators
+            delegator.TypeNameCreators.Add(new KeyValuePairNameCreator());
             delegator.TypeNameCreators.Add(new GenericNameCreator(delegator));
             return delegator;
         }
