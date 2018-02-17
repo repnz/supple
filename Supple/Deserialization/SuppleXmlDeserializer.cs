@@ -39,6 +39,7 @@ namespace Supple.Deserialization
 
             // Value Deserializers
             delegator.NodeDeserializers.Add(new ArrayValueDeserializer(delegator));
+            delegator.NodeDeserializers.Add(new EnumDeserializer());
             delegator.NodeDeserializers.Add(new ConvertableDeserializer());
             delegator.NodeDeserializers.Add(new CollectionValueDeserializer(delegator));
             delegator.NodeDeserializers.Add(new ReferenceVariableDeserializer(referenceStore));

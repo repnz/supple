@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Deserialization\Deserializers\EnumDeserializer.cs" />
+    <Compile Include="Deserialization\Exceptions\EnumConvertException.cs" />
     <Compile Include="Deserialization\NameCreators\KeyValuePairNameCreator.cs" />
     <Compile Include="Deserialization\ValueNode.cs" />
     <Compile Include="Deserialization\Context\ContextNodeDeserializer.cs" />

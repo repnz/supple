@@ -31,7 +31,7 @@ namespace Supple.Deserialization.Exceptions
         {
             get
             {
-                return $"Invalid Element {Node.Name} {base.Message}";
+                return $"Invalid Node {Node.Name} {base.Message}";
             }
         }
     }
