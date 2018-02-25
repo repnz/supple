@@ -35,7 +35,7 @@ namespace Supple.Deserialization
 
             // First check if the node is an interface
             delegator.NodeDeserializers.Add(new InterfaceDeserializer(resolver, delegator));
-            delegator.NodeDeserializers.Add(new ArrayNodeDeserializer(delegator));
+            delegator.NodeDeserializers.Add(new ArrayNodeDeserializer(delegator, resolver));
 
             // Value Deserializers
             delegator.NodeDeserializers.Add(new ArrayValueDeserializer(delegator));

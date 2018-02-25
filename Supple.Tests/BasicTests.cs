@@ -21,7 +21,7 @@ namespace Supple.Tests
             string objectXml = "<StringPropertiesTestObject Name=\"MyName\" Value=\"MyValue\"/>";
 
             var obj = _tester.Deserialize<StringPropertiesTestObject>(objectXml);
-
+            
             Assert.AreEqual("MyName", obj.Name);
             Assert.AreEqual("MyValue", obj.Value);
         }
@@ -85,7 +85,7 @@ namespace Supple.Tests
                   "<Value>MyValue</Value>" +
                   "<SomeProp>SOMEVAL</SomeProp>"+
               "</StringPropertiesTestObject>";
-
+            
             try
             {
                 var obj = _tester.Deserialize<StringPropertiesTestObject>(objectXml);

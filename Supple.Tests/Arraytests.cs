@@ -41,7 +41,7 @@ namespace Supple.Tests
         }
 
         [TestMethod]
-        public void ArrayOfInterfaces_Deserialize()
+        public void ArrayOfInterfaces()
         {
             string objectXml = 
                 "<ArrayOfTestInterface>" +
@@ -56,7 +56,7 @@ namespace Supple.Tests
         }
 
         [TestMethod]
-        public void MultiDimensionalArray_Deserialize()
+        public void MultiDimensionalArray()
         {
             string objectXml =
                 "<ArrayOfArrayOfInt32>" +
@@ -73,7 +73,7 @@ namespace Supple.Tests
         }
 
         [TestMethod]
-        public void ArrayOfList_Deserialize()
+        public void ArrayOfList()
         {
             string objectXml =
                 "<ArrayOfListOfInt32>" +
@@ -87,6 +87,25 @@ namespace Supple.Tests
             Assert.AreEqual(1, arrayOfLists[0][1]);
             Assert.AreEqual(7, arrayOfLists[1][0]);
             Assert.AreEqual(8, arrayOfLists[1][1]);
+        }
+
+        [TestMethod]
+        public void Arrays_ElementNameForImplementation()
+        {
+            string objectXml = 
+                "<ArrayOfTestInterface>" +
+                "   <TestInterfaceImpl1 OneProperty=\"1\"/>" +
+                "   <TestInterfaceImpl2 TwoProperty=\"2\"/>" +
+                "   <TestInterfaceImpl1  OneProperty=\"3\"/>" +
+                "</ArrayOfTestInterface>";
+
+            ITestInterface[] impls = _tester.Deserialize<ITestInterface[]>(objectXml);
+
+            Assert.IsNotNull(impls);
+            Assert.AreEqual(3, impls.Length);
+            Assert.IsInstanceOfType(impls[0], typeof(TestInterfaceImpl1));
+            Assert.IsInstanceOfType(impls[1], typeof(TestInterfaceImpl2));
+            Assert.IsInstanceOfType(impls[2], typeof(TestInterfaceImpl1));
         }
     }
 }
